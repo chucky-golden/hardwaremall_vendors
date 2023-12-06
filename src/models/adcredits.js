@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const creditImportSchema = new Schema({
+const creditSchema = new Schema({
     vendorId: {
         type: String,
         required: true
@@ -13,6 +13,6 @@ const creditImportSchema = new Schema({
 }, { timestamps: true })
 
 
-const Credit = mongoose.model('Credit', creditImportSchema);
+const Credit = mongoose.model('Credit', creditSchema);
 
 module.exports = Credit

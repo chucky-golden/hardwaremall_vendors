@@ -1,5 +1,5 @@
 const Vendors = require('../models/vendors')
-const productImport = require('../models/productImport')
+const ProductImport = require('../models/productimport')
 
 async function onlyMailExist (email){
     let vendors = await Vendors.findOne({ email: email  })
@@ -12,7 +12,7 @@ async function onlyMailExist (email){
 
 
 async function idExist (vendorId, productid){
-    let product = await productImport.findOne({ vendorId: vendorId, _id: productid  })
+    let product = await ProductImport.findOne({ vendorId: vendorId, _id: productid  })
     if(product === null){
         return false
     }else{

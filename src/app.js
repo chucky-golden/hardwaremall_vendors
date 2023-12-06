@@ -11,7 +11,7 @@ const startServer = async () => {
     expressApp(app)
 
     app.listen(PORT, () => {
-        console.log('vendors running...')
+        console.log(`vendors running... on port: ${PORT}`)
     })
     .on('error', (err) => {
         console.log(err)

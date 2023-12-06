@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const productImportSchema = new Schema({
+const ProductImportSchema = new Schema({
     vendorId: {
         type: String,
         required: true
@@ -25,6 +25,6 @@ const productImportSchema = new Schema({
 }, { timestamps: true })
 
 
-const ProductImport = mongoose.model('ProductImport', productImportSchema);
+const ProductImport = mongoose.model('ProductImport', ProductImportSchema);
 
 module.exports = ProductImport
