@@ -1,4 +1,4 @@
-const ProductImport = require('../models/productimport')
+const ProductImport = require('../models/productImport')
 const Vendors = require('../models/vendors')
 const { idExist } = require('../middlewares/details')
 const axios = require('axios')

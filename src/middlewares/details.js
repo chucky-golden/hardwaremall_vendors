@@ -1,5 +1,5 @@
 const Vendors = require('../models/vendors')
-const ProductImport = require('../models/productimport')
+const ProductImport = require('../models/productImport')
 
 async function onlyMailExist (email){
     let vendors = await Vendors.findOne({ email: email  })

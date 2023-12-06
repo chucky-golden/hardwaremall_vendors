@@ -1,5 +1,5 @@
 const Vendors = require('../models/vendors')
-const ProductImport = require('../models/productimport')
+const ProductImport = require('../models/productImport')
 const axios = require('axios')
 
 
