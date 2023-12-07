@@ -90,7 +90,7 @@ const findVendorWithSlug = async (req, res) => {
         if(vendor !== null){
             const importedProductids = await ProductImport.find({ vendorId: vendor._id }, { projection: {  productid: 1 } })
             
-            let response = axios.post('http://localhost:3000/admin/users/vendorproducts', {
+            let response = axios.post('https://gateway-6ew9.onrender.com/admin/users/vendorproducts', {
                 data: importedProductids
             })
 
