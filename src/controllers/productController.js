@@ -26,7 +26,7 @@ const importProduct = async (req, res) => {
                 }
 
                 
-                let response = await axios.post('https://admin-dqcw.onrender.com/updateData/data', {
+                let response = await axios.post('https://gateway-6ew9.onrender.com/admin/updateData/data', {
                     productid: req.body.vendorId,
                     countperimport: countperimport
                 })
@@ -134,7 +134,7 @@ const fetchProducts = async (req, res) => {
         let productids = await ProductImport.find({ vendorId: uid }, { projection: { _id: 0, productid: 1 } })
         if (productids !== null) {
 
-            let response = await axios.get('https://admin-dqcw.onrender.com/vendors/getvendorproducts', {
+            let response = await axios.get('https://gateway-6ew9.onrender.com/admin/vendors/getvendorproducts', {
                 products: productids
             })
 
