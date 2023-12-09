@@ -161,9 +161,29 @@ const vendorsReset = async (req, res) => {
 }
 
 
+const fetchVendor = async (req, res) => {
+    try{
+
+        let id = req.params.id
+        const vendor = await Vendors.findOne({ _id: id });
+
+        if(vendor !== null){
+            res.json({ message: vendor })
+        }else{
+            res.json({ message: 'no vendor found' })
+        }
+
+    }catch(error){
+        console.log(error)
+        res.json({ message: 'error processing request' })
+    }
+}
+
+
 module.exports = {
     vendorslogin,
     vendorsregister,
     vendorsForgot,
     vendorsReset,
+    fetchVendor,
 }
