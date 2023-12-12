@@ -27,8 +27,8 @@ module.exports = async (app) => {
     // app.use(bodyParser.json());
     // app.use(bodyParser.urlencoded({ extended: true }));
 
-    const upload = multer();
-    app.use(upload.array());
+    // const upload = multer();
+    // app.use(upload.array());
 
     // setting d express session middleware
     app.use(session({
