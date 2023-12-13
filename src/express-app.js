@@ -1,7 +1,5 @@
 const express = require('express')
 const cors = require('cors')
-const multer = require('multer');
-const bodyParser = require('body-parser');
 const basicRoutes = require('./routes/basicRoutes')
 const productRoutes = require('./routes/productRoutes')
 const creditRoutes = require('./routes/creditRoutes')
