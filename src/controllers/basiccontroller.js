@@ -2,6 +2,7 @@ const Vendors = require('../models/vendors')
 const passwordHash = require('../middlewares/passwordencrypt')
 const { onlyMailExist } = require('../middlewares/details')
 const cloudinary = require('../middlewares/cloudinary')
+const streamifier = require('streamifier')
 const { sendmail, mailGenerator } = require('../middlewares/mailer')
 
 
@@ -14,40 +15,52 @@ const vendorsregister = async (req, res) => {
 
         var details = await onlyMailExist(email);
         
-        if(details === false){    
-            
-            let slug = Math.floor(Math.random() * Date.now()).toString(16)
-            slug = slug + '-' + req.body.name
+        if(details === false){
 
-            password = await passwordHash(req.body.password)
+            // Convert the buffer to a readable stream
+            const bufferStream = streamifier.createReadStream(req.file.buffer);
+            // Create a stream from the buffer
+            const stream = cloudinary.uploader.upload_stream(async (error, result) => {
+                if (error) {
+                    console.error(error);
+                    return res.json({ message: 'Error uploading product' });
+                } else {
 
-            const result = await cloudinary.uploader.upload(req.file.path)
+                    let slug = Math.floor(Math.random() * Date.now()).toString(16)
+                    slug = slug + '-' + req.body.name
 
-            let info = {
-                email: email,
-                password: password,
-                title: req.body.title,
-                contact: req.body.contact,
-                location: req.body.location,
-                website: req.body.website,
-                description: req.body.description,
-                whatsapp: req.body.whatsapp,
-                photo: result.secure_url,
-                balance: '0',
-                block: '1',
-                cloudinaryid: result.public_id,
-                callLeads: '0',
-                phoneLeads: '0',
-                slug: slug,
-            }
+                    password = await passwordHash(req.body.password)
 
-            const vendors = await new Vendors(info).save()
-            if(vendors !== null){
-                req.session.vendors = vendors
-                res.json({ message: 'store account created', data: vendors })
-            }else{
-                res.json({ message: 'error creating account' })
-            }
+                    let info = {
+                        email: email,
+                        password: password,
+                        title: req.body.title,
+                        contact: req.body.contact,
+                        location: req.body.location,
+                        website: req.body.website,
+                        description: req.body.description,
+                        whatsapp: req.body.whatsapp,
+                        photo: result.secure_url,
+                        balance: '0',
+                        block: '1',
+                        cloudinaryid: result.public_id,
+                        callLeads: '0',
+                        phoneLeads: '0',
+                        slug: slug,
+                    }
+
+                    const vendors = await new Vendors(info).save()
+                    if(vendors !== null){
+                        req.session.vendors = vendors
+                        res.json({ message: 'store account created', data: vendors })
+                    }else{
+                        res.json({ message: 'error creating account' })
+                    }
+                }
+            });
+
+            // Pipe the buffer stream to the Cloudinary stream
+            bufferStream.pipe(stream);
         }else{
             res.json({message: "vendor account with email address already exists"});
         }
