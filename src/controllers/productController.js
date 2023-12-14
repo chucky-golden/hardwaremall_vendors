@@ -7,51 +7,47 @@ const axios = require('axios')
 // import products into store
 const importProduct = async (req, res) => {
     try{
-        let uid = req.body.vendorId
         let countperimport = Number(req.body.countperimport)
 
         countperimport += 1
 
-        if(req.session.vendors._id == uid){ 
-            var details = await idExist(req.body.vendorId, req.body.productid);
-            
-            if(details === false){             
+        var details = await idExist(req.body.vendorId, req.body.productid);
+        
+        if(details === false){             
 
-                let info = {
-                    vendorId: req.body.vendorId,
-                    productid: req.body.productid,
-                    price: req.body.price,
-                    quantity: req.body.quantity,
-                    specification: req.body.specification,
-                }
-
-                
-                let response = await axios.post('https://admin-dqcw.onrender.com/updateData/data', {
-                    productid: req.body.vendorId,
-                    countperimport: countperimport
-                })
-                if(response.data.message === 'import count updated'){
-                    
-                    const product = await new ProductImport(info).save()
-                    if(product !== null){
-                        res.json({ message: 'product imported' })
-                    }else{
-                        res.json({ message: 'error importing product' })
-                    }
-                    
-                }
-                else {
-                    res.json({ message: 'error processing request' })
-                }
-
-
-                
-            }else{
-                res.json({ message: "product already imported" });
+            let info = {
+                vendorId: req.body.vendorId,
+                productid: req.body.productid,
+                price: req.body.price,
+                quantity: req.body.quantity,
+                specification: req.body.specification,
             }
+
+            
+            let response = await axios.post('https://admin-dqcw.onrender.com/updateData/data', {
+                productid: req.body.vendorId,
+                countperimport: countperimport
+            })
+            if(response.data.message === 'import count updated'){
+                
+                const product = await new ProductImport(info).save()
+                if(product !== null){
+                    res.json({ message: 'product imported' })
+                }else{
+                    res.json({ message: 'error importing product' })
+                }
+                
+            }
+            else {
+                res.json({ message: 'error processing request' })
+            }
+
+
+            
         }else{
-            res.json({ message: "unauthorised user" });  
+            res.json({ message: "product already imported" });
         }
+        
 
     }catch (error) {
         console.log(error)
@@ -68,27 +64,23 @@ const editImportProduct = async (req, res) => {
         let vendorid = req.body.vendor_id
         let productid = req.body.product_id
 
-        if(req.session.vendors._id == vendorid){ 
 
-            const user = await ProductImport.updateOne({ vendorId: vendorid, productid: productid }, 
-                {
-                    $set:{
-                        price: req.body.price,
-                        quantity: req.body.quantity,
-                        specification: req.body.specification,
-                    }
+        const user = await ProductImport.updateOne({ vendorId: vendorid, productid: productid }, 
+            {
+                $set:{
+                    price: req.body.price,
+                    quantity: req.body.quantity,
+                    specification: req.body.specification,
                 }
-            )
-
-            if(user !== null){
-                res.json({ message: 'product updated' })
-            }else{
-                res.json({ message: 'error updating product' })
             }
+        )
 
+        if(user !== null){
+            res.json({ message: 'product updated' })
         }else{
-            res.json({ message: "unauthorised user" });  
+            res.json({ message: 'error updating product' })
         }
+
 
     }catch (error) {
         console.log(error)

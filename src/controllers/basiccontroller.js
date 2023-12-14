@@ -4,6 +4,8 @@ const { onlyMailExist } = require('../middlewares/details')
 const cloudinary = require('../middlewares/cloudinary')
 const streamifier = require('streamifier')
 const { sendmail, mailGenerator } = require('../middlewares/mailer')
+const jwt = require('jsonwebtoken')
+const { SESSION_SECRET } = require('../config')
 
 
 // vendors register
@@ -84,6 +86,18 @@ const vendorslogin = async (req, res) => {
             const result = password === vendors.password; 
           if (result) {
                 if(vendors.block == '1'){
+
+                    const token = jwt.sign(
+                        { vendor_id: vendors._id, email },
+                        process.env.SESSION_SECRET,
+                        {
+                          expiresIn: "2h",
+                        }
+                    );
+                    // save user token
+                    vendors.token = token;
+
+
                     req.session.vendors = vendors 
                     res.json({ message: 'login successful', data: vendors }) 
                 }else{
