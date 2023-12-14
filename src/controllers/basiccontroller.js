@@ -94,12 +94,10 @@ const vendorslogin = async (req, res) => {
                           expiresIn: "2h",
                         }
                     );
-                    // save user token
-                    vendors.token = token;
 
 
                     req.session.vendors = vendors 
-                    res.json({ message: 'login successful', data: vendors }) 
+                    res.json({ message: 'login successful', data: vendors, token: token }) 
                 }else{
                     res.json({ message: 'account suspended' }) 
                 }
