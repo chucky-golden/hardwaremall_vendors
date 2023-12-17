@@ -88,7 +88,7 @@ const vendorslogin = async (req, res) => {
                 if(vendors.block == '1'){
 
                     const token = jwt.sign(
-                        { vendor_id: vendors._id, email },
+                        { id: vendors._id },
                         process.env.SESSION_SECRET,
                         {
                           expiresIn: "2h",
