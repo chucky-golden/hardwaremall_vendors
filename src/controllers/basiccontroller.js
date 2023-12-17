@@ -29,7 +29,7 @@ const vendorsregister = async (req, res) => {
                 } else {
 
                     let slug = Math.floor(Math.random() * Date.now()).toString(16)
-                    slug = slug + '-' + req.body.name
+                    slug = slug + '-' + req.body.title
 
                     password = await passwordHash(req.body.password)
 
@@ -53,8 +53,17 @@ const vendorsregister = async (req, res) => {
 
                     const vendors = await new Vendors(info).save()
                     if(vendors !== null){
-                        req.session.vendors = vendors
-                        res.json({ message: 'store account created', data: vendors })
+
+                        const token = jwt.sign(
+                            { id: vendors._id },
+                            process.env.SESSION_SECRET,
+                            {
+                              expiresIn: "2h",
+                            }
+                        );
+
+
+                        res.json({ message: 'store account created', data: vendors, token: token })
                     }else{
                         res.json({ message: 'error creating account' })
                     }
@@ -95,8 +104,6 @@ const vendorslogin = async (req, res) => {
                         }
                     );
 
-
-                    req.session.vendors = vendors 
                     res.json({ message: 'login successful', data: vendors, token: token }) 
                 }else{
                     res.json({ message: 'account suspended' }) 
