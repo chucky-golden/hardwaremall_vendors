@@ -7,6 +7,10 @@ const axios = require('axios')
 // import products into store
 const importProduct = async (req, res) => {
     try{
+        if(req.body.vendor_email != req.vendor.email){
+            return res.json({ message: 'invalid or expired token' })
+        }
+        
         let countperimport = Number(req.body.countperimport)
 
         countperimport += 1
@@ -61,6 +65,10 @@ const importProduct = async (req, res) => {
 // edit product imported into store
 const editImportProduct = async (req, res) => {
     try{
+        if(req.body.vendor_email != req.vendor.email){
+            return res.json({ message: 'invalid or expired token' })
+        }
+        
         let vendorid = req.body.vendor_id
         let productid = req.body.product_id
 
