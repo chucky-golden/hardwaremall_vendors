@@ -29,7 +29,7 @@ const importProduct = async (req, res) => {
 
             
             let response = await axios.post('https://admin-dqcw.onrender.com/updateData/data', {
-                productid: req.body.vendorId,
+                productid: req.body.productid,
                 countperimport: countperimport
             })
             if(response.data.message === 'import count updated'){
