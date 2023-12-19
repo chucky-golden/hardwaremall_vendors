@@ -139,9 +139,12 @@ const fetchProducts = async (req, res) => {
                 products: productids
             })
 
-            
-            response.json({ data: response.data.foundProducts })
-            
+            if(response.data.foundProducts !== null) {
+                res.json({ data: response.data.foundProducts })
+            }else{
+                res.json({ data: response.data.foundProducts })
+            }
+
         }
         else {
             res.json({ message: 'No products found for the given vendor ID' });
