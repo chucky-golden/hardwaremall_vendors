@@ -11,7 +11,7 @@ const importProduct = async (req, res) => {
             return res.json({ message: 'invalid or expired token' })
         }
         
-        if(req.body.countperimport == null || req.body.countperimport == undefined){ 
+        if(req.body.countperimport === null || req.body.countperimport === undefined){ 
             let countperimport = 0
         }else{
             let countperimport = Number(req.body.countperimport)
