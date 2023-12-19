@@ -11,7 +11,7 @@ const importProduct = async (req, res) => {
             return res.json({ message: 'invalid or expired token' })
         }
         
-        
+
         let countperimport = 0
         if(req.body.countperimport === null || req.body.countperimport === undefined){ 
             countperimport += 1
@@ -167,6 +167,31 @@ const fetchProducts = async (req, res) => {
 
 
 
+// delete imported product
+const deleteProduct = async (req, res) => {
+    try{
+        if(req.body.vendor_email != req.vendor.email){
+            return res.json({ message: 'invalid or expired token' })
+        }
+
+        const importedId = req.body.imported_id
+
+        const result = await ProductImport.findByIdAndDelete(importedId)
+
+        if(result !== null){
+            res.json({ message: 'imported product deleted' })
+        }else{
+            res.json({ message: 'error deleting imported product' })
+        }  
+
+    }catch (error) {
+        console.log(error)
+        res.json({ message: 'error processing request' })
+    }
+}
+
+
+
 
 
 
@@ -174,5 +199,6 @@ module.exports = {
     importProduct,
     dashboard,
     fetchProducts,
-    editImportProduct
+    editImportProduct,
+    deleteProduct
 }
