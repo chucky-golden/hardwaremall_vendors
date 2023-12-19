@@ -133,7 +133,7 @@ const fetchProducts = async (req, res) => {
 
         console.log('vid', uid)
 
-        let productids = await ProductImport.find({ vendorId: uid }, {  _id: 0, productid: 1 } )
+        // let productids = await ProductImport.find({ vendorId: uid }, {  _id: 0, productid: 1 } )
 
         console.log('data', productids)
 
