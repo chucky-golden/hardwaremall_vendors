@@ -27,9 +27,7 @@ const editData = async (req, res) => {
         let vendorid = req.body.vendorid
         let action = req.body.action
 
-        console.log('vid', vendorid)
-        console.log('vaction', action)
-
+        
         if(action == 'disable'){
             const user = await Vendors.updateOne({ _id: vendorid }, 
                 {
