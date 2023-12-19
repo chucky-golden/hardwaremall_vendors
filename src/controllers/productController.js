@@ -131,11 +131,7 @@ const fetchProducts = async (req, res) => {
         
         let uid = req.params.id
 
-        console.log('vid', uid)
-
         let productids = await ProductImport.find({ vendorId: uid }, {  _id: 0, productid: 1 } )
-
-        console.log('data', productids)
 
         if (productids !== null && productids.length > 0) {
 
@@ -143,12 +139,9 @@ const fetchProducts = async (req, res) => {
                 products: productids
             })
 
-            if(response.data.foundProducts !== null) {
-                response.json({ data: response.data.foundProducts })
-            }else{
-                response.json({ data: response.data.foundProducts })
-            }
-
+            
+            response.json({ data: response.data.foundProducts })
+            
         }
         else {
             res.json({ message: 'No products found for the given vendor ID' });
