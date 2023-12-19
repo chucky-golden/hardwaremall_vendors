@@ -11,14 +11,17 @@ const importProduct = async (req, res) => {
             return res.json({ message: 'invalid or expired token' })
         }
         
+        
+        let countperimport = 0
         if(req.body.countperimport === null || req.body.countperimport === undefined){ 
-            let countperimport = 0
+            countperimport += 1
+            countperimport = countperimport.toString()
         }else{
-            let countperimport = Number(req.body.countperimport)
+            countperimport = Number(req.body.countperimport)
+            countperimport += 1
+            countperimport = countperimport.toString()
         }
         
-        countperimport += 1
-        countperimport = countperimport.toString()
 
         var details = await idExist(req.body.vendorId, req.body.productid);
         
