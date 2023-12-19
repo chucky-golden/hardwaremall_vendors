@@ -15,6 +15,8 @@ const importProduct = async (req, res) => {
 
         countperimport += 1
 
+        countperimport = countperimport.toString()
+
         var details = await idExist(req.body.vendorId, req.body.productid);
         
         if(details === false){             
