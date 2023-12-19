@@ -133,29 +133,27 @@ const fetchProducts = async (req, res) => {
 
         console.log('vid', uid)
 
-        // let productids = await ProductImport.find({ vendorId: uid }, {  _id: 0, productid: 1 } )
+        let productids = await ProductImport.find({ vendorId: uid }, {  _id: 0, productid: 1 } )
 
         console.log('data', productids)
 
-        // if (productids !== null && productids.length > 0) {
+        if (productids !== null && productids.length > 0) {
 
-        //     let response = await axios.post('https://admin-dqcw.onrender.com/vendors/getvendorproducts', {
-        //         products: productids
-        //     })
+            let response = await axios.post('https://admin-dqcw.onrender.com/vendors/getvendorproducts', {
+                products: productids
+            })
 
-        //     if(response.data.foundProducts !== null) {
-        //         response.json({ data: response.data.foundProducts })
-        //     }else{
-        //         response.json({ data: response.data.foundProducts })
-        //     }
+            if(response.data.foundProducts !== null) {
+                response.json({ data: response.data.foundProducts })
+            }else{
+                response.json({ data: response.data.foundProducts })
+            }
 
-        // }
-        // else {
-        //     res.json({ message: 'No products found for the given vendor ID' });
-        // }
-
-        res.json({ message: 'testing' })
-        
+        }
+        else {
+            res.json({ message: 'No products found for the given vendor ID' });
+        }
+       
 
     }catch (error) {
         console.log(error)
