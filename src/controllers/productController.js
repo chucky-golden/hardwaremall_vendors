@@ -132,9 +132,9 @@ const fetchProducts = async (req, res) => {
         let uid = req.params.id
 
         let productids = await ProductImport.find({ vendorId: uid }, { projection: { _id: 0, productid: 1 } })
-        if (productids !== null) {
+        if (productids !== null && productids.length > 0) {
 
-            let response = await axios.get('https://admin-dqcw.onrender.com/vendors/getvendorproducts', {
+            let response = await axios.post('https://admin-dqcw.onrender.com/vendors/getvendorproducts', {
                 products: productids
             })
 
@@ -146,7 +146,7 @@ const fetchProducts = async (req, res) => {
 
         }
         else {
-            res.json({ message: 'error handling request' })
+            res.json({ message: 'No products found for the given vendor ID' });
         }
         
 
