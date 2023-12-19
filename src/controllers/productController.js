@@ -131,7 +131,12 @@ const fetchProducts = async (req, res) => {
         
         let uid = req.params.id
 
+        console.log('vid', uid)
+
         let productids = await ProductImport.find({ vendorId: uid }, { projection: { _id: 0, productid: 1 } })
+
+        console.log('data', productids)
+        
         if (productids !== null && productids.length > 0) {
 
             let response = await axios.post('https://admin-dqcw.onrender.com/vendors/getvendorproducts', {
