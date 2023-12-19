@@ -106,7 +106,7 @@ const dashboard = async (req, res) => {
         
         let uid = req.params.id
 
-        let finance = await Vendors.find({ _id: uid }, { projection: { _id: 0, balance: 1, callLeads: 1, phoneLeads: 1 } })
+        let finance = await Vendors.find({ _id: uid }, {  _id: 0, balance: 1, callLeads: 1, phoneLeads: 1 } )
         if (finance !== null) {
             res.json({ message: finance })
         }
