@@ -16,8 +16,9 @@ const getProducts = async (req, res) => {
             for(let x = 0; x < importedProducts.length; x++){
                 if(data._id === importedProducts[x].productid){
                     let details = []
+
                     for(let i = 0; i < vendors.length; i++){
-                        if(vendors[i]._id === importedProducts[i].vendorId){
+                        if(vendors[i]._id === importedProducts[x].vendorId){
                             details.push(vendors[i])
                         }
                     }
@@ -55,8 +56,9 @@ const getTopProducts = async (req, res) => {
             for(let x = 0; x < importedProducts.length; x++){
                 if(data._id === importedProducts[x].productid){
                     let details = []
+
                     for(let i = 0; i < vendors.length; i++){
-                        if(vendors[i]._id === importedProducts[i].vendorId){
+                        if(vendors[i]._id === importedProducts[x].vendorId){
                             details.push(vendors[i])
                         }
                     }
