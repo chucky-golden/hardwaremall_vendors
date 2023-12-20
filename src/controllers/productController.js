@@ -25,7 +25,8 @@ const importProduct = async (req, res) => {
 
         var details = await idExist(req.body.vendorId, req.body.productid);
         
-        if(details === false){             
+        if(details === false){
+            let slug = Math.floor(Math.random() * Date.now()).toString(16);        
 
             let info = {
                 vendorId: req.body.vendorId,
@@ -33,6 +34,7 @@ const importProduct = async (req, res) => {
                 price: req.body.price,
                 quantity: req.body.quantity,
                 specification: req.body.specification,
+                slug: slug
             }
 
             
@@ -68,7 +70,25 @@ const importProduct = async (req, res) => {
 }
 
 
+// get imported product using slug
+const getProductSlug = async (req, res) => {
+    try{
+        let slug = req.params.slug
 
+        let product = await ProductImport.find({ slug: slug })
+
+        if (product !== null) {
+            res.json({ message: product })
+        }
+        else {
+            res.json({ message: 'No product with slug found' });
+        }
+
+    }catch (error) {
+        console.log(error)
+        res.json({ message: 'error processing request' })
+    }
+}
 
 // edit product imported into store
 const editImportProduct = async (req, res) => {
@@ -174,9 +194,10 @@ const deleteProduct = async (req, res) => {
             return res.json({ message: 'invalid or expired token' })
         }
 
-        const importedId = req.body.imported_id
+        const vendorid = req.body.vendor_id
+        const productid = req.body.product_id
 
-        const result = await ProductImport.findByIdAndDelete(importedId)
+        const result = await ProductImport.deleteOne({ vendorId: vendorid, productid: productid })
 
         if(result !== null){
             res.json({ message: 'imported product deleted' })
@@ -200,5 +221,6 @@ module.exports = {
     dashboard,
     fetchProducts,
     editImportProduct,
-    deleteProduct
+    deleteProduct,
+    getProductSlug
 }

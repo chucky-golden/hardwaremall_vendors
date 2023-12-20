@@ -15,6 +15,8 @@ router.post('/messagelead', userController.messageLead)
 
 
 router.post('/productsid', userController.productsImported)
+router.post('/products', userController.getProducts)
+router.post('/topproducts', userController.getTopProducts)
 
 
 module.exports = router
