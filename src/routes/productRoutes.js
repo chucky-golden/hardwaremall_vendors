@@ -7,6 +7,7 @@ router.post('/editimport', auth, productController.editImportProduct)
 router.post('/deleteImport', auth, productController.deleteProduct)
 
 
+router.get('/getproduct/:slug', productController.getProductSlug)
 router.get('/dashboard/:id', productController.dashboard)
 router.get('/fetchproducts/:id', productController.fetchProducts)
 

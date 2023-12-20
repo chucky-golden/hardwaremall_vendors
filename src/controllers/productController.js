@@ -70,7 +70,25 @@ const importProduct = async (req, res) => {
 }
 
 
+// get imported product using slug
+const getProductSlug = async (req, res) => {
+    try{
+        let slug = req.params.slug
 
+        let product = await ProductImport.find({ slug: slug })
+
+        if (product !== null) {
+            res.json({ message: product })
+        }
+        else {
+            res.json({ message: 'No product with slug found' });
+        }
+
+    }catch (error) {
+        console.log(error)
+        res.json({ message: 'error processing request' })
+    }
+}
 
 // edit product imported into store
 const editImportProduct = async (req, res) => {
@@ -203,5 +221,6 @@ module.exports = {
     dashboard,
     fetchProducts,
     editImportProduct,
-    deleteProduct
+    deleteProduct,
+    getProductSlug
 }
