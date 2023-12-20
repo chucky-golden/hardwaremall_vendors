@@ -139,12 +139,12 @@ const fetchProducts = async (req, res) => {
         
         let uid = req.params.id
 
-        let productids = await ProductImport.find({ vendorId: uid }, {  _id: 0, productid: 1 } )
+        let products = await ProductImport.find({ vendorId: uid })
 
-        if (productids !== null && productids.length > 0) {
+        if (products !== null && products.length > 0) {
 
             let response = await axios.post('https://admin-dqcw.onrender.com/vendors/getvendorproducts', {
-                products: productids
+                products: products
             })
 
             if(response.data.foundProducts !== null) {
