@@ -199,8 +199,8 @@ const deleteProduct = async (req, res) => {
 
         const result = await ProductImport.deleteOne({ vendorId: vendorid, productid: productid })
 
-        if(result !== null){
-            res.json({ message: 'imported product deleted' })
+        if (result.deletedCount > 0) {
+            res.json({ message: 'Imported product deleted' });
         }else{
             res.json({ message: 'error deleting imported product' })
         }  
