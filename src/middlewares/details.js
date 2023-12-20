@@ -13,10 +13,10 @@ async function onlyMailExist (email){
 
 async function idExist (vendorId, productid){
     let product = await ProductImport.findOne({ vendorId: vendorId, productid: productid  })
-    if(product.length > 0){
-        return true
-    }else{
+    if(product === null){
         return false
+    }else{
+        return true
     }
 }
 
