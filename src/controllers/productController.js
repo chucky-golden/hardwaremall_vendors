@@ -75,7 +75,7 @@ const getProductSlug = async (req, res) => {
     try{
         let slug = req.params.slug
 
-        let product = await ProductImport.find({ slug: slug })
+        let product = await ProductImport.findOne({ slug: slug })
 
         if (product !== null) {
             res.json({ message: product })
