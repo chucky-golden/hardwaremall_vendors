@@ -175,8 +175,6 @@ const findVendorWithSlug = async (req, res) => {
                     data: importedProductids
                 })
 
-                console.log(response.data)
-
                 if(response.data.foundproducts !== null){
                     data = {
                         vendor: vendor,
