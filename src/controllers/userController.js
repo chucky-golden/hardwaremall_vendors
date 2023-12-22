@@ -171,7 +171,7 @@ const findVendorWithSlug = async (req, res) => {
 
             if(importedProductids !== null){
 
-                let response = axios.post('https://admin-dqcw.onrender.com/users/vendorproducts', {
+                let response = await axios.post('https://admin-dqcw.onrender.com/users/vendorproducts', {
                     data: importedProductids
                 })
 
