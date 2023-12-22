@@ -111,8 +111,12 @@ const editImportProduct = async (req, res) => {
             }
         )
 
+        let response = await axios.post('https://admin-dqcw.onrender.com/vendors/geteditedproducts', {
+                productid: productid
+            })
+
         if(user !== null){
-            res.json({ message: 'product updated' })
+            res.json({ message: 'product updated', data: response.data.product })
         }else{
             res.json({ message: 'error updating product' })
         }
