@@ -164,9 +164,15 @@ const findVendorWithSlug = async (req, res) => {
     try{
         let slug = req.body.slug
 
+        console.log('sent', slug)
+
         const vendor = await Vendors.findOne({ slug: slug })
+
+        console.log('v', vendor)
         if(vendor !== null){
             const importedProductids = await ProductImport.find({ vendorId: vendor._id }, { productid: 1 })
+            
+            console.log('found', importedProductids)
             
             let response = axios.post('https://admin-dqcw.onrender.com/users/vendorproducts', {
                 data: importedProductids
