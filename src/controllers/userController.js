@@ -146,14 +146,21 @@ const productsImported = async (req, res) => {
         let vendorids = [];
         let vendorDetails = []
 
-        const importedProducts = await ProductImport.find({ productid: id }, { projection: {  vendorId: 1 } })
+        console.log('d',id)
+
+        const importedProducts = await ProductImport.find({ productid: id }, { vendorId: 1 })
+
+        console.log('i',importedProducts)
+
         if(importedProducts !== null){
 
             importedProducts.forEach(imported => {
                 vendorids.push(imported.vendorId)
             });
 
-            const vendors =  Vendors.findOne()
+            console.log('v',vendorids)
+
+            const vendors = await Vendors.findOne()
 
             vendorids.forEach(ids => { 
                 for(let x = 0; x < vendors.length; x++){
