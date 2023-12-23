@@ -154,7 +154,7 @@ const productsImported = async (req, res) => {
                 vendorids.push(imported.vendorId)
             });
 
-            const vendors = await Vendors.findOne()
+            const vendors = await Vendors.find()
 
             vendors.forEach(vendor => { 
                 for(let x = 0; x < vendorids.length; x++){
