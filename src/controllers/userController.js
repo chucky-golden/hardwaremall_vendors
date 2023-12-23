@@ -146,11 +146,7 @@ const productsImported = async (req, res) => {
         let vendorids = [];
         let vendorDetails = []
 
-        console.log('d',id)
-
         const importedProducts = await ProductImport.find({ productid: id }, { vendorId: 1 })
-
-        console.log('i',importedProducts)
 
         if(importedProducts !== null){
 
@@ -158,17 +154,17 @@ const productsImported = async (req, res) => {
                 vendorids.push(imported.vendorId)
             });
 
-            console.log('v',vendorids)
-
             const vendors = await Vendors.findOne()
 
             vendorids.forEach(ids => { 
                 for(let x = 0; x < vendors.length; x++){
-                    if(ids === vendors[x]._id){
+                    if(ids == vendors[x]._id){
                         vendorDetails.push(vendors[x])
                     }
                 }
             });
+
+            console.log('v',vendorDetails)
 
             res.json({ vendors: vendorDetails })
 
