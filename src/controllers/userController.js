@@ -156,10 +156,10 @@ const productsImported = async (req, res) => {
 
             const vendors = await Vendors.findOne()
 
-            vendorids.forEach(ids => { 
-                for(let x = 0; x < vendors.length; x++){
-                    if(ids == vendors[x]._id){
-                        vendorDetails.push(vendors[x])
+            vendors.forEach(vendor => { 
+                for(let x = 0; x < vendorids.length; x++){
+                    if(vendor._id == vendorids[x]){
+                        vendorDetails.push(vendor)
                     }
                 }
             });
