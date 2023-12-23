@@ -85,10 +85,30 @@ const getTopProducts = async (req, res) => {
 const vendors = async (req, res) => {
     try{
         const vendors = await Vendors.find().sort({ createdAt: -1 })
+        const imports = await ProductImport.find()
+
+        let sentVendors = []
+
         if(vendors !== null){
-            res.json({ foundvendors: vendors })
+            
+            vendors.forEach(vendor => {
+                let vImport = []
+                for(let x = 0; x < imports.length; x++){
+                    if(vendor._id == imports[x].vendorId){
+                        vImport.push(imports[x])
+                    }
+                }
+
+                let searched = {
+                    vendor: vendor,
+                    importCount: vImport.length
+                }
+                sentVendors.push(searched)
+            })
+
+            res.json({ foundvendors: sentVendors })
         }else{
-            res.json({ foundvendors: vendors })
+            res.json({ foundvendors: sentVendors })
         }
 
     }catch (error) {
