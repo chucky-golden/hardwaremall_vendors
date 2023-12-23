@@ -78,7 +78,12 @@ const getProductSlug = async (req, res) => {
         let product = await ProductImport.findOne({ slug: slug })
 
         if (product !== null) {
-            res.json({ message: product })
+
+            let response = await axios.post('https://admin-dqcw.onrender.com/vendors/geteditedproducts', {
+                productid: product.productid
+            })
+
+            res.json({ message: product, data: response.data.product })
         }
         else {
             res.json({ message: 'No product with slug found' });
