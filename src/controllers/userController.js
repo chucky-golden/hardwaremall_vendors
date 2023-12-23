@@ -164,8 +164,6 @@ const productsImported = async (req, res) => {
                 }
             });
 
-            console.log('v',vendorDetails)
-
             res.json({ vendors: vendorDetails })
 
         }else{
