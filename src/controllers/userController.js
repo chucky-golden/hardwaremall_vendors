@@ -52,39 +52,18 @@ const getTopProducts = async (req, res) => {
 
         let productDetails = []
 
-        // products.forEach(data => {
-        //     let details = []
-        //     for(let x = 0; x < importedProducts.length; x++){
-        //         if(data._id === importedProducts[x].productid){
-
-        //             for(let i = 0; i < vendors.length; i++){
-        //                 if(vendors[i]._id === importedProducts[x].vendorId){
-        //                     details.push(vendors[i])
-        //                 }
-        //             }
-        //         }
-        //     }
-        //     let sendData = {
-        //         product: data,
-        //         vendors: details
-        //     }
-        //     productDetails.push(sendData)
-        // });
-
-
-
         products.forEach(data => {
             let details = []
-            importedProducts.forEach(imp => {
-                if(data._id === imp.productid){
-                    vendors.forEach(vnds => {
-                        if(vnds._id === imp.vendorId){
-                            details.push(vnds)
-                        }
-                    })
-                }
-            })
+            for(let x = 0; x < importedProducts.length; x++){
+                if(data._id === importedProducts[x].productid){
 
+                    for(let i = 0; i < vendors.length; i++){
+                        if(vendors[i]._id === importedProducts[x].vendorId){
+                            details.push(vendors[i])
+                        }
+                    }
+                }
+            }
             let sendData = {
                 product: data,
                 vendors: details
@@ -92,7 +71,28 @@ const getTopProducts = async (req, res) => {
             productDetails.push(sendData)
         });
 
-        console.log('p', productDetails)
+
+
+        // products.forEach(data => {
+        //     let details = []
+        //     importedProducts.forEach(imp => {
+        //         if(data._id === imp.productid){
+        //             vendors.forEach(vnds => {
+        //                 if(vnds._id === imp.vendorId){
+        //                     details.push(vnds)
+        //                 }
+        //             })
+        //         }
+        //     })
+
+        //     let sendData = {
+        //         product: data,
+        //         vendors: details
+        //     }
+        //     productDetails.push(sendData)
+        // });
+
+        // console.log('p', productDetails)
         
         res.json({ foundproducts: productDetails })
 
