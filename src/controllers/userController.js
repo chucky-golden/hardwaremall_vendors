@@ -295,9 +295,12 @@ const messageLead = async (req, res) => {
         const vendors = await Vendors.find({ slug: slug })
 
         console.log('v', vendors)
-        
+
         if(vendors !== null){
-            leads = vendors.phoneLeads
+            leads = Number(vendors.phoneLeads)
+
+            console.log('o',leads)
+            
             leads += 1
             console.log('l', leads)
 
