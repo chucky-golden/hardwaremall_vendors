@@ -293,11 +293,14 @@ const messageLead = async (req, res) => {
         console.log('s', slug)
 
         const vendors = await Vendors.find({ slug: slug })
+
+        console.log('v', vendors)
+        
         if(vendors !== null){
-            leads = Number(vendors.phoneLeads)
+            leads = vendors.phoneLeads
             leads += 1
             console.log('l', leads)
-            
+
             const vendor = await Vendors.updateOne({ _id: vendors._id }, 
                 {
                     $set:{
