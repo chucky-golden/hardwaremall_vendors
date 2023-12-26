@@ -55,11 +55,15 @@ const getTopProducts = async (req, res) => {
         products.forEach(data => {
             let details = []
             for(let x = 0; x < importedProducts.length; x++){
-                if(data._id == importedProducts[x].productid){
+                if(data._id === importedProducts[x].productid){
+
+                    console.log('match found p')
 
                     for(let i = 0; i < vendors.length; i++){
-                        if(vendors[i]._id == importedProducts[x].vendorId){
+                        if(vendors[i]._id === importedProducts[x].vendorId){
                             details.push(vendors[i])
+
+                            console.log('match found v')
                         }
                     }
                 }
