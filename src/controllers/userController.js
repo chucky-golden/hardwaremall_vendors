@@ -260,7 +260,7 @@ const callLead = async (req, res) => {
     try{
         let slug = req.body.slug
 
-        const vendors = await Vendors.find({ slug: slug })
+        const vendors = await Vendors.findOne({ slug: slug })
         if(vendors !== null){
             leads = Number(vendors.callLeads)
             leads += 1
@@ -292,7 +292,7 @@ const messageLead = async (req, res) => {
 
         console.log('s', slug)
 
-        const vendors = await Vendors.find({ slug: slug })
+        const vendors = await Vendors.findOne({ slug: slug })
 
         console.log('v', vendors)
 
