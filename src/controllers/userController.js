@@ -50,29 +50,28 @@ const getTopProducts = async (req, res) => {
         const vendors = await Vendors.find()
         const importedProducts = await ProductImport.find()
 
-        console.log('p', products)
-
         let productDetails = []
 
         products.forEach(data => {
+            let details = []
             for(let x = 0; x < importedProducts.length; x++){
-                if(data._id === importedProducts[x].productid){
-                    let details = []
+                if(data._id == importedProducts[x].productid){
 
                     for(let i = 0; i < vendors.length; i++){
-                        if(vendors[i]._id === importedProducts[x].vendorId){
+                        if(vendors[i]._id == importedProducts[x].vendorId){
                             details.push(vendors[i])
                         }
                     }
-
-                    let sendData = {
-                        product: data,
-                        vendors: details
-                    }
-                    productDetails.push(sendData)
                 }
             }
+            let sendData = {
+                product: data,
+                vendors: details
+            }
+            productDetails.push(sendData)
         });
+
+        console.log('p', productDetails)
         
         res.json({ foundproducts: productDetails })
 
