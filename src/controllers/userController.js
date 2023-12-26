@@ -297,10 +297,13 @@ const messageLead = async (req, res) => {
         console.log('v', vendors)
 
         if(vendors !== null){
+
+            console.log(vendors.phoneLeads)
+
             leads = Number(vendors.phoneLeads)
 
-            console.log('o',leads)
-            
+            console.log('o', leads)
+
             leads += 1
             console.log('l', leads)
 
