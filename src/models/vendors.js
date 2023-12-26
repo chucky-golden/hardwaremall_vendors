@@ -39,7 +39,7 @@ const vendorsSchema = new Schema({
         required: true
     },
     balance: {
-        type: String,
+        type: Number,
         required: true
     },
     block: {
@@ -51,11 +51,11 @@ const vendorsSchema = new Schema({
         required: true
     },
     callLeads: {
-        type: String,
+        type: Number,
         required: true
     },
     phoneLeads: {
-        type: String,
+        type: Number,
         required: true
     },
     slug: {

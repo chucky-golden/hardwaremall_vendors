@@ -43,11 +43,11 @@ const vendorsregister = async (req, res) => {
                         description: req.body.description,
                         whatsapp: req.body.whatsapp,
                         photo: result.secure_url,
-                        balance: '0',
+                        balance: 0,
                         block: '1',
                         cloudinaryid: result.public_id,
-                        callLeads: '0',
-                        phoneLeads: '0',
+                        callLeads: 0,
+                        phoneLeads: 0,
                         slug: slug,
                     }
 

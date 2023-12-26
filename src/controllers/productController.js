@@ -15,11 +15,9 @@ const importProduct = async (req, res) => {
         let countperimport = 0
         if(req.body.countperimport === null || req.body.countperimport === undefined){ 
             countperimport += 1
-            countperimport = countperimport.toString()
         }else{
             countperimport = Number(req.body.countperimport)
             countperimport += 1
-            countperimport = countperimport.toString()
         }
         
 
