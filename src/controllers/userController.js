@@ -262,6 +262,7 @@ const callLead = async (req, res) => {
 
         const vendors = await Vendors.findOne({ slug: slug })
         if(vendors !== null){
+            
             leads = Number(vendors.callLeads)
             leads += 1
 
