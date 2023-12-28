@@ -3,7 +3,7 @@ const ProductImport = require('../models/productImport')
 const axios = require('axios')
 
 
-// get vendor and return to admin
+// get vendor for top products and return to admin
 const getProducts = async (req, res) => {
     try{
         let products = req.body.products
@@ -18,57 +18,9 @@ const getProducts = async (req, res) => {
                 if(data._id === importedProducts[x].productid){
 
                     for(let i = 0; i < vendors.length; i++){
-                        if(vendors[i]._id === importedProducts[x].vendorId){
-                            details.push(vendors[i])
-                        }
-                    }
-                }
-            }
-            let sendData = {
-                product: data,
-                vendors: details
-            }
-            productDetails.push(sendData)
-        });
-
-        
-        res.json({ foundproducts: productDetails })
-
-
-    }catch (error) {
-        console.log(error)
-        res.json({ message: 'error processing request' })
-    }
-}
-
-
-
-// get vendor for top products and return to admin
-const getTopProducts = async (req, res) => {
-    try{
-        let products = req.body.products
-        const vendors = await Vendors.find()
-        const importedProducts = await ProductImport.find()
-
-        let productDetails = []
-
-        products.forEach(data => {
-            let details = []
-            for(let x = 0; x < importedProducts.length; x++){
-                if(data._id === importedProducts[x].productid){
-
-                    for(let i = 0; i < vendors.length; i++){
                         if(vendors[i]._id.toString() === importedProducts[x].vendorId){
-
-                            console.log('gg found')
-
                             details.push(vendors[i])
                         }
-
-                        console.log('not found')
-                        console.log('v', vendors[i]._id)
-                        console.log('c', importedProducts[x].vendorId)
-                        console.log('d', importedProducts[x])
                     }
                 }
             }
@@ -77,32 +29,7 @@ const getTopProducts = async (req, res) => {
                 vendors: details
             }
             productDetails.push(sendData)
-
-            console.log('c', productDetails)
         });
-
-
-
-        // products.forEach(data => {
-        //     let details = []
-        //     importedProducts.forEach(imp => {
-        //         if(data._id === imp.productid){
-        //             vendors.forEach(vnds => {
-        //                 if(vnds._id === imp.vendorId){
-        //                     details.push(vnds)
-        //                 }
-        //             })
-        //         }
-        //     })
-
-        //     let sendData = {
-        //         product: data,
-        //         vendors: details
-        //     }
-        //     productDetails.push(sendData)
-        // });
-
-        // console.log('p', productDetails)
         
         res.json({ foundproducts: productDetails })
 
@@ -336,5 +263,4 @@ module.exports = {
     callLead,
     messageLead,
     getProducts,
-    getTopProducts
 }
