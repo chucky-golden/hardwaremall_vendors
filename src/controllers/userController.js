@@ -50,6 +50,10 @@ const getTopProducts = async (req, res) => {
         const vendors = await Vendors.find()
         const importedProducts = await ProductImport.find()
 
+        console.log('p', products)
+        console.log('v', vendors)
+        console.log('i', importedProducts)
+
         let productDetails = []
 
         products.forEach(data => {
@@ -69,6 +73,8 @@ const getTopProducts = async (req, res) => {
                 vendors: details
             }
             productDetails.push(sendData)
+
+            console.log('c', productDetails)
         });
 
 
