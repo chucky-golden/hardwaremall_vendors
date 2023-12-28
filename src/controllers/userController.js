@@ -57,6 +57,8 @@ const getTopProducts = async (req, res) => {
             for(let x = 0; x < importedProducts.length; x++){
                 if(data._id === importedProducts[x].productid){
 
+                    console.log('a', importedProducts[x])
+
                     for(let i = 0; i < vendors.length; i++){
                         if(vendors[i]._id === importedProducts[x].vendorId){
 
