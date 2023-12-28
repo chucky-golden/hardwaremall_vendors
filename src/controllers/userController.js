@@ -13,24 +13,24 @@ const getProducts = async (req, res) => {
         let productDetails = []
 
         products.forEach(data => {
+            let details = []
             for(let x = 0; x < importedProducts.length; x++){
                 if(data._id === importedProducts[x].productid){
-                    let details = []
 
                     for(let i = 0; i < vendors.length; i++){
                         if(vendors[i]._id === importedProducts[x].vendorId){
                             details.push(vendors[i])
                         }
                     }
-
-                    let sendData = {
-                        product: data,
-                        vendors: details
-                    }
-                    productDetails.push(sendData)
                 }
             }
+            let sendData = {
+                product: data,
+                vendors: details
+            }
+            productDetails.push(sendData)
         });
+
         
         res.json({ foundproducts: productDetails })
 
