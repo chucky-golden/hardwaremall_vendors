@@ -61,8 +61,12 @@ const getTopProducts = async (req, res) => {
             for(let x = 0; x < importedProducts.length; x++){
                 if(data._id === importedProducts[x].productid){
 
+                    console.log('t found')
+
                     for(let i = 0; i < vendors.length; i++){
                         if(vendors[i]._id === importedProducts[x].vendorId){
+                            console.log('gg found')
+
                             details.push(vendors[i])
                         }
                     }
