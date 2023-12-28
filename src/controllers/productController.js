@@ -176,7 +176,7 @@ const fetchProducts = async (req, res) => {
 
         }
         else {
-            res.json({ message: 'No products found for the given vendor ID' });
+            res.json({ data: []});
         }
        
 
