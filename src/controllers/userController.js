@@ -64,8 +64,11 @@ const getTopProducts = async (req, res) => {
 
                             details.push(vendors[i])
                         }
-                        
+
                         console.log('not found')
+                        console.log('v', vendors[i]._id)
+                        console.log('c', importedProducts[x].vendorId)
+                        console.log('d', importedProducts[x])
                     }
                 }
             }
